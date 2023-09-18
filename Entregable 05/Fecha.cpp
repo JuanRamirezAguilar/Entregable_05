@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <chrono>
 
 // Constructores 
@@ -109,19 +110,28 @@ std::ostream& operator<<(std::ostream& out, const Fecha& objSalida) {
 
 std::istream& operator >> (std::istream& in, Fecha& objEntrada) {
     std::string myString;
-    // Dia
-    std::getline(in, myString, '/');
-    if (!std::isdigit(std::stoi(myString))) {
-        return;
+    Fecha auxFecha;
+
+    std::getline(in, myString, '*');
+    std::stringstream miStream(myString);
+
+    // Revisa si el primer digito de la fecha es un digito
+    // Si no lo es, descarta todo el campo y establece una fecha por defecto.
+    std::getline(miStream, myString, '/');
+    if (!std::isdigit(char(myString[0]))) {
+        objEntrada = auxFecha;
+        return in;
     }
+
+    // Dia
     objEntrada.setDia(std::stoi(myString));
 
     // Mes
-    std::getline(in, myString, '/');
+    std::getline(miStream, myString, '/');
     objEntrada.setMes(std::stoi(myString));
 
     // Año
-    std::getline(in, myString, '*');
+    std::getline(miStream, myString);
     objEntrada.setAnio(std::stoi(myString));
     
     return in;

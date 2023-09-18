@@ -15,14 +15,16 @@ int main () {
     ArchivoPaciente miArchivo;
     string nameFile = "respaldo_consultas.file";
 
-    //cout << "Dame el nombr del Archivo ==>  ";
-    //fflush(stdin);
-    //getline(cin, nameFile);
-
     miListaDeConsultas = miArchivo.importBackup(nameFile);
 
     system("cls");
-    //miListaDeConsultas.imprimir(false);
+    cout << "Numero de Registros Encontrados: " << miListaDeConsultas.length() <<endl;
+    cout << "A continuacion se imprimen todos los datos..."; 
+    cin.clear(); cin.ignore(); cin.sync();
+    
+    int i = 12520;
+    cout << i << ")._" << endl << miListaDeConsultas.indice(i).getPaciente().toString() <<endl<<endl;
+    cin.clear(); cin.ignore(); cin.sync();
 
     return 0;
 }

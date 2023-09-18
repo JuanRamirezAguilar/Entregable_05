@@ -34,8 +34,6 @@ Lista<Consulta> ArchivoPaciente::importBackup(std::string& nombreArchivo) {
         throw std::runtime_error("Error al abrir el archivo.");
     }
 
-
-    int indice = 1;
     std::string miCampo;
     while(!archivoEntrada.eof()) {
 
@@ -56,35 +54,37 @@ Lista<Consulta> ArchivoPaciente::importBackup(std::string& nombreArchivo) {
 
         std::stringstream flujoDeRegistro(miCampo);
 
+        //std::cout << indice << ")._ " <<std::endl;
+
         // Toma la fecha de la consulta
         flujoDeRegistro >> miFecha;
         miConsulta.setFecha(miFecha);
-        std::cout << miFecha.toString() <<std::endl;
+        //std::cout << miFecha.toString() <<std::endl;
         
         // Toma la hora de la consulta
         flujoDeRegistro >> miHora;
         miConsulta.setHora(miHora);
-        std::cout << miHora.toString() <<std::endl;
+        //std::cout << miHora.toString() <<std::endl;
 
         // Toma el codigo de la consulta
         std::getline(flujoDeRegistro, miCampo, '*');
         miConsulta.setCodigo(miCampo);
-        std::cout << miConsulta.getCodigo() <<std::endl;
+        //std::cout << miConsulta.getCodigo() <<std::endl;
 
         // Toma el Diagnostico de la consulta
         flujoDeRegistro >> miDiagnostico;
         miConsulta.setDiagnostico(miDiagnostico);
-        std::cout << miDiagnostico.toString() <<std::endl;
+        //std::cout << miDiagnostico.toString() <<std::endl;
 
         // Toma el Medico de la consulta;
         flujoDeRegistro >> miMedico;
         miConsulta.setMedico(miMedico);
-        std::cout << miMedico.toString() <<std::endl;
+        //std::cout << miMedico.toString() <<std::endl;
 
         // Toma el Paciente de la consulta;
         flujoDeRegistro >> miPaciente;
         miConsulta.setPaciente(miPaciente);
-        std::cout << miPaciente.toString() <<std::endl;
+        //std::cout << miPaciente.toString() <<std::endl;
 
         // Toma el Medicamento de la consulta;
         flujoDeRegistro >> miMedicamento;
@@ -97,11 +97,9 @@ Lista<Consulta> ArchivoPaciente::importBackup(std::string& nombreArchivo) {
         // Se ingresa en la lista
         miLista.insertar(miConsulta);
         
-        std::cout << indice << ")._ " <<std::endl;
-        std::cout << miLista.ult()->get_dato().toString();
-        std::cout <<std::endl<<std::endl;
-        if (indice == 60){std::cin.ignore();}
-        indice++;
+        //std::cout << miLista.ult()->get_dato().toString();
+        //std::cout <<std::endl<<std::endl;
+        //indice++;
 
     }
 

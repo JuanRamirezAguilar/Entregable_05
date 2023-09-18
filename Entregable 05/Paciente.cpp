@@ -102,13 +102,19 @@ std::istream& operator >> (std::istream& in, Paciente& objEntrada) {
     std::getline(in, myString, '*');
     std::string numero;
     char caracter;
+    
     for (int i = 0; i < int(myString.length()); i++) {
         caracter = char(myString[i]);
         if (caracter != ' ') {
             numero += caracter;
         }
+        
     }
-    objEntrada.setTelefono(std::stoll(numero));
+    if (!std::isdigit(numero[0])) {
+        objEntrada.setTelefono(0);
+    } else {
+        objEntrada.setTelefono(std::stoll(numero));
+    }
 
     return in;
 }
